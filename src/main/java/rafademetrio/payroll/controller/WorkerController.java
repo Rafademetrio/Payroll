@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import rafademetrio.payroll.dto.WorkerDTO;
 import rafademetrio.payroll.model.Worker;
 import rafademetrio.payroll.service.WorkerService;
 
@@ -32,7 +33,8 @@ public class WorkerController {
             @ApiResponse(responseCode = "201", description = "User created successfully"),
             @ApiResponse(responseCode = "422", description = "Invalid user data provided")
     })
-    public ResponseEntity<Worker> createWorker(@RequestBody Worker workerToSave){
+    public ResponseEntity<Worker> createWorker(@RequestBody WorkerDTO workerDTO){
+        Worker workerToSave = workerDTO.toModel();
         Worker savedWorker = workerService.create(workerToSave);
 
 

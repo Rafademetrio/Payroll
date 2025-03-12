@@ -1,51 +1,35 @@
-package rafademetrio.payroll.model;
+package rafademetrio.payroll.dto;
 
+import rafademetrio.payroll.model.Notification;
+import rafademetrio.payroll.model.Worker;
 
-import jakarta.persistence.*;
-
+import java.util.Collections;
 import java.util.List;
 
-@Entity
-public class Worker {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class WorkerDTO {
     private String name;
-
-    @Column(unique = true)
     private String email;
-
     private String password;
     private float hourlyRate;
+    private List<NotificationDTO> notifications;
+    //private List<Notification> notifications;
 
-    @ManyToMany
-    @JoinTable(
-            name = "worker_notification",
-            joinColumns = @JoinColumn(name = "woker_id"),
-            inverseJoinColumns = @JoinColumn(name = "notification_id")
-    )
-    private List<Notification> notifications;
+    public Worker toModel() {
+        //List<Notification> notificationList = Collections.singletonList(notifications.listIterator().next().toModel());
+        return new Worker(null, this.name, this.email,this.password, this.hourlyRate, null);
 
-
-    public Worker() {
+        //ajustar o notificationList
     }
 
-    public Worker(Long id,String name, String email, String password, float hourlyRate, List<Notification> notifications) {
-        this.id = id;
+    public WorkerDTO() {
+    }
+
+    public WorkerDTO(String name, String email, String password, float hourlyRate, List<NotificationDTO> notifications) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.hourlyRate = hourlyRate;
         this.notifications = notifications;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -80,15 +64,11 @@ public class Worker {
         this.hourlyRate = hourlyRate;
     }
 
-    public float calculateSalary(float hoursWorked) {
-        return this.hourlyRate * hoursWorked;
-    }
-
-    public List<Notification> getNotifications() {
+    public List<NotificationDTO> getNotifications() {
         return notifications;
     }
 
-    public void setNotifications(List<Notification> notifications) {
+    public void setNotifications(List<NotificationDTO> notifications) {
         this.notifications = notifications;
     }
 }
