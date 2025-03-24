@@ -19,7 +19,7 @@ public class Worker {
     private String password;
     private float hourlyRate;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "worker_notification",
             joinColumns = @JoinColumn(name = "woker_id"),
