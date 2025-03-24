@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class PayrollApplication {
-
 	public static void main(String[] args) {
 		System.out.println("PGHOST: " + System.getenv("PGHOST"));
 		System.out.println("PGPORT: " + System.getenv("PGPORT"));
@@ -13,5 +12,4 @@ public class PayrollApplication {
 		System.out.println("PGUSER: " + System.getenv("PGUSER"));
 		SpringApplication.run(PayrollApplication.class, args);
 	}
-
 }
